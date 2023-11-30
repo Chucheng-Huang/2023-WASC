@@ -7,11 +7,6 @@ X = data;
 % load texture.mat;
 % gnd = Y;
 
-% % 当维度大于100时，用PCA预处理加速
-% % [eigvector, eigvalue, elapse] = PCA_dencai(X, 100); 
-% % projection=eigvector;%(:,1:dim);
-% % X = X* projection;
-
 %% Parameter
 [n,d] = size(X);
 c = length(unique(gnd));
@@ -20,9 +15,13 @@ k = 5;          % neighbors of anchor graph
 
 if d < 20
     rL  = [2:1:d];   %dimentionality
-elseif d < 60
+elseif d < 100
     rL = [5:5:d];
 else
+  % 当维度大于100时，用PCA预处理加速
+    [eigvector, eigvalue, elapse] = PCA_dencai(X, 100); 
+    projection=eigvector;%(:,1:dim);
+    X = X* projection;
     rL = [10:10:d];
 end
 muL = [10^-6,10^-5,10^-4,10^-3,10^-2,10^-1];
