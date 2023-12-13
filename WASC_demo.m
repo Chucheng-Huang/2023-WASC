@@ -22,7 +22,7 @@ else
     [eigvector, eigvalue, elapse] = PCA_dencai(X, 100); 
     projection=eigvector;%(:,1:dim);
     X = X* projection;
-    rL = [10:10:d];
+    rL = [10:10:100];
 end
 muL = [10^-6,10^-5,10^-4,10^-3,10^-2,10^-1];
 lambdaL = [0.2,0.4,0.6,0.8];
